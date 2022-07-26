@@ -10,11 +10,17 @@ import kotlinx.coroutines.runBlocking
  */
 // 将Int转成String
 fun map() = runBlocking {
-    (1..3).asFlow()
-        .map { "number: $it" }
-        .collect{ println(it) }
+    //(1..3).asFlow()
+      flow {
+          for (i in 1..3){
+              delay(1000)
+              emit(i)
+          }
+      }
+          .map { "number: $it" }
+          .collect{ println(it) }
 }
-fun transformlatest() = runBlocking {
+fun transformLatest() = runBlocking {
     flow {
         emit("a")
         delay(100)
@@ -28,7 +34,7 @@ fun transformlatest() = runBlocking {
     }.collect()
 }
 
-fun flatmaplatest() = runBlocking {
+fun flatMapLatest() = runBlocking {
     flow {
         emit("a")
         delay(100)
@@ -45,8 +51,9 @@ fun flatmaplatest() = runBlocking {
     }.collect()
 }
 fun main(){
-    flatmaplatest()
-    //transformlatest()
+    //flatMapLatest()
+    //transformLatest()
+    map()
 }
 
 

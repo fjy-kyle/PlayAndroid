@@ -1,7 +1,6 @@
 package com.example.playandroid.ui.page.article.list
 
 import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -56,12 +55,11 @@ fun ArticleListPaging(
                     ErrorContent(modifier = Modifier.fillParentMaxSize()) {
                         lazyPagingItems.retry()
                     }
-                    Log.d("1", lazyPagingItems.itemCount.toString())
                 }
             }
             // 添加出现错误时的页面
             loadStates.append is LoadState.Error -> {
-                 val e = lazyPagingItems.loadState.append as LoadState.Error
+                val e = lazyPagingItems.loadState.append as LoadState.Error
                 e.error.localizedMessage?:"".showToast()
                 item {
                     Row(

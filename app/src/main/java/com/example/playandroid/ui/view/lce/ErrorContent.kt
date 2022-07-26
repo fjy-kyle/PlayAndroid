@@ -17,6 +17,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.playandroid.R
+import com.example.playandroid.logic.model.PlayError
+import com.example.playandroid.logic.model.PlayState
 
 /**
  * 加载错误时出现显示的页面
@@ -44,5 +46,7 @@ fun ErrorContent(
 @Preview(showBackground = true)
 @Composable
 fun Preview() {
-    ErrorContent(onErrorClick = {})
+    ErrorContent(
+        onErrorClick = {}
+    )
 }

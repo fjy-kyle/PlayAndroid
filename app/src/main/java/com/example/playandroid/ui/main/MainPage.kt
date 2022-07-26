@@ -18,6 +18,7 @@ import androidx.compose.ui.text.toUpperCase
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.playandroid.R
 import com.example.playandroid.ui.page.home.HomePage
+import com.example.playandroid.ui.page.project.ProjectPage
 import java.util.Locale
 
 // 主页面
@@ -50,7 +51,7 @@ fun MainPage(actions: PlayActions, viewModel: HomeViewModel = viewModel()){
         Crossfade(targetState = position) { screen ->
             when(screen) {
                 CourseTabs.HOME_PAGE -> { HomePage(actions, modifier) }
-                CourseTabs.PROJECT -> Text(text = "测试2")// ProjectPage(actions, modifier)
+                CourseTabs.PROJECT ->  { ProjectPage(actions, modifier) }
                 CourseTabs.OFFICIAL_ACCOUNT -> Text(text = "测试3")// OfficialAccountPage(actions, modifier)
                 CourseTabs.MINE -> Text(text = "测试4")// ProfilePage(actions, modifier)
             }

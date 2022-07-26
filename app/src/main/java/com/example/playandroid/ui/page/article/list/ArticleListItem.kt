@@ -135,7 +135,7 @@ fun NewArticleListItem(
                         )
                     )
                 )
-                .clickable (onClick = onClick)
+                .clickable(onClick = onClick)
         ) {
             if (hasImage){
             ImageLoader(

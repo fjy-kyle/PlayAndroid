@@ -13,7 +13,9 @@ fun LcePage(playState: PlayState,onErrorClick:() -> Unit, content:@Composable ()
             LoadingContent()
         }
         is PlayError ->{
-            ErrorContent(onErrorClick = onErrorClick)
+            ErrorContent(
+                onErrorClick = onErrorClick
+            )
         }
         is PlaySuccess<*> ->{
             content()

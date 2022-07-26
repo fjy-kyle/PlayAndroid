@@ -18,7 +18,7 @@ fun main() = runBlocking {
     val feedList = getFeedList(friendList)
     println(" getFeedList finish")
 
-    val end  = System.currentTimeMillis()
+    val end = System.currentTimeMillis()
     println("cost ${end - start} ms")
 }
 

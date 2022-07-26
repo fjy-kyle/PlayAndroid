@@ -14,5 +14,7 @@ interface HomePageService {
 
     // 获取首页文章列表
     @GET("article/list/{page}/json")
-    suspend fun getArticleList(@Path("page") page: Int) : BaseModel<ArticleListModel>
+    suspend fun getArticleList(
+        @Path("page") page: Int
+    ) : BaseModel<ArticleListModel>
 }
