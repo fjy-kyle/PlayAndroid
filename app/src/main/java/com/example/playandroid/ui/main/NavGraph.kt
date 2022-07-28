@@ -10,6 +10,7 @@ import com.example.playandroid.logic.model.ArticleModel
 import com.example.playandroid.ui.main.PlayDestinations.ARTICLE_ROUTE
 import com.example.playandroid.ui.main.PlayDestinations.ARTICLE_ROUTE_URL
 import com.example.playandroid.ui.main.PlayDestinations.HOME_PAGE_ROUTE
+import com.example.playandroid.ui.page.article.ArticlePage
 import com.google.gson.Gson
 import java.net.URLEncoder
 
@@ -20,7 +21,7 @@ object PlayDestinations {
 }
 
 /*
-    对应用程序中的导航进行建模
+    对应用程序中的导航进行建模，内部逻辑均已实现，外部调用只需传参即可
  */
 class PlayActions(navController: NavHostController){
 
@@ -31,7 +32,7 @@ class PlayActions(navController: NavHostController){
         navController.navigate("${ARTICLE_ROUTE}/$result")
     }
     // 返回
-    val uoPress: () -> Unit = { navController.navigateUp() }
+    val upPress: () -> Unit = { navController.navigateUp() }
 }
 
 
@@ -60,10 +61,10 @@ fun NavGraph(
             // 在详情页获取 ARTICLE_ROUTE_URL
             val parcelable = argument.getString(ARTICLE_ROUTE_URL)
             val fromJson = Gson().fromJson(parcelable, ArticleModel::class.java)
-//            ArticlePage(
-//                article = fromJson,
-//                onBack = actions.uoPress
-//            )
+            ArticlePage(
+                article = fromJson,
+                onBack = actions.upPress
+            )
         }
     })
 }

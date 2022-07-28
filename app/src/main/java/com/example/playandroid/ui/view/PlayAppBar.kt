@@ -27,7 +27,7 @@ import com.google.accompanist.insets.statusBarsHeight
 fun PlayAppBar(
     title:String,
     showBack: Boolean = true,
-    click:( ()-> Unit )? = null,
+    leftClick:( ()-> Unit )? = null,
     showRight: Boolean = false,
     rightImg: ImageVector = Icons.Rounded.MoreVert,
     rightClick: ( ()->Unit )? = null,
@@ -42,10 +42,10 @@ fun PlayAppBar(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
             ) {
-            if (showBack && click != null){
+            if (showBack && leftClick != null){
                 IconButton(
                     modifier = Modifier.
-                    wrapContentWidth(Alignment.Start), onClick = click)
+                    wrapContentWidth(Alignment.Start), onClick = leftClick)
                 {
                     Icon(
                         imageVector = Icons.Rounded.ArrowBack,

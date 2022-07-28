@@ -40,6 +40,87 @@ fun ArticleItem(
 }
 
 /**
+ * ArticleListItem 2.0 优化后
+ */
+@Composable
+fun NewArticleListItem(
+    article: ArticleModel,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
+){
+    val hasImage = article.envelopePic.isNotBlank()
+    Card(
+        modifier = modifier
+            .padding(horizontal = 10.dp, vertical = if (hasImage) 7.dp else 5.dp)
+            .fillMaxWidth()
+            .height(if (hasImage) 90.dp else 71.dp),
+        elevation = 5.dp,
+        shape = RoundedCornerShape(10.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .background(
+                    brush = Brush.linearGradient(
+                        colors = arrayListOf(
+                            colorResource(id = R.color.article_item_bg_start),
+                            colorResource(id = R.color.article_item_bg_mid),
+                            colorResource(id = R.color.article_item_bg_end)
+                        )
+                    )
+                ).clickable(onClick = onClick)
+        ) {
+            if (hasImage){
+                ImageLoader(
+                    data = article.envelopePic,
+                    Modifier.aspectRatio(1f)
+                )
+            }
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(10.dp)
+            ) {
+                Text(
+                    text = getHtmlText(article.title),
+                    style = MaterialTheme.typography.subtitle1,
+                    maxLines = if (hasImage) 2 else 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier
+                        .weight(1f)
+                        .wrapContentHeight(Alignment.Top)
+                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .weight(1f)
+                        .wrapContentHeight(Alignment.Bottom)
+                ) {
+                    Text(
+                        text = article.superChapterName,
+                        style = MaterialTheme.typography.caption,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier
+                            .weight(1f)
+                            .wrapContentWidth(Alignment.Start)
+                    )
+                    Text(
+                        text = if (TextUtils.isEmpty(article.author)) article.shareUser else article.author,
+                        style = MaterialTheme.typography.caption,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier
+                            .padding(start = 8.dp)
+                            .weight(1f)
+                            .wrapContentWidth(Alignment.Start)
+                    )
+                }
+            }
+        }
+    }
+}
+
+/**
  * 显示标题列表单项
  */
 @Composable
@@ -106,84 +187,3 @@ fun ArticleListItem(
     }
 }
 
-/**
- * ArticleListItem 2.0 优化后
- */
-@Composable
-fun NewArticleListItem(
-    article: ArticleModel,
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit
-){
-    val hasImage = article.envelopePic.isNotBlank()
-    Card(
-        modifier = modifier
-            .padding(horizontal = 10.dp, vertical = if (hasImage) 7.dp else 5.dp)
-            .fillMaxWidth()
-            .height(if (hasImage) 90.dp else 71.dp),
-        elevation = 5.dp,
-        shape = RoundedCornerShape(10.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .background(
-                    brush = Brush.linearGradient(
-                        colors = arrayListOf(
-                            colorResource(id = R.color.article_item_bg_start),
-                            colorResource(id = R.color.article_item_bg_mid),
-                            colorResource(id = R.color.article_item_bg_end)
-                        )
-                    )
-                )
-                .clickable(onClick = onClick)
-        ) {
-            if (hasImage){
-            ImageLoader(
-                data = article.envelopePic,
-                Modifier.aspectRatio(1f)
-                )
-            }
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(10.dp)
-            ) {
-                Text(
-                    text = getHtmlText(article.title),
-                    style = MaterialTheme.typography.subtitle1,
-                    maxLines = if (hasImage) 2 else 1,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier
-                        .weight(1f)
-                        .wrapContentHeight(Alignment.Top)
-                )
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .weight(1f)
-                        .wrapContentHeight(Alignment.Bottom)
-                ) {
-                    Text(
-                        text = article.superChapterName,
-                        style = MaterialTheme.typography.caption,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier
-                            .weight(1f)
-                            .wrapContentWidth(Alignment.Start)
-                    )
-                    Text(
-                        text = if (TextUtils.isEmpty(article.author)) article.shareUser else article.author,
-                        style = MaterialTheme.typography.caption,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier
-                            .padding(start = 8.dp)
-                            .weight(1f)
-                            .wrapContentWidth(Alignment.Start)
-                    )
-                }
-            }
-        }
-    }
-}

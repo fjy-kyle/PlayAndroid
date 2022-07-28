@@ -1,10 +1,6 @@
 package com.example.playandroid.ui.page.article.list
 
-import android.util.Log
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material.Button
@@ -27,18 +23,19 @@ fun ArticleListPaging(
     listState: LazyListState,
     lazyPagingItems: LazyPagingItems<ArticleModel>,
     enterArticle: (ArticleModel) -> Unit
-){
+) {
     LazyColumn(
         modifier = modifier,
         state = listState
-    ){
+    ) {
         items(lazyPagingItems) { article ->
             ArticleItem(article) { urlArgs ->
+                //传入进入文章详情页所需数据（ArticleModel）
                 enterArticle(urlArgs)
             }
         }
         val loadStates = lazyPagingItems.loadState
-        when{
+        when {
             //刷新正在加载时的页面
             loadStates.refresh is LoadState.Loading -> {
                 item { LoadingContent(modifier = Modifier.fillParentMaxSize()) }
@@ -50,7 +47,7 @@ fun ArticleListPaging(
             // 刷新出现错误时的页面
             loadStates.refresh is LoadState.Error -> {
                 val e = lazyPagingItems.loadState.refresh as LoadState.Error
-                e.error.localizedMessage?:"".showToast()
+                e.error.localizedMessage ?: "".showToast()
                 item {
                     ErrorContent(modifier = Modifier.fillParentMaxSize()) {
                         lazyPagingItems.retry()
@@ -60,10 +57,12 @@ fun ArticleListPaging(
             // 添加出现错误时的页面
             loadStates.append is LoadState.Error -> {
                 val e = lazyPagingItems.loadState.append as LoadState.Error
-                e.error.localizedMessage?:"".showToast()
+                e.error.localizedMessage ?: "".showToast()
                 item {
                     Row(
-                        modifier = Modifier.fillMaxWidth().padding(8.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(8.dp),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.Center
                     ) {
