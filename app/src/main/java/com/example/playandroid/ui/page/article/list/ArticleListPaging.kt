@@ -24,6 +24,7 @@ fun ArticleListPaging(
     lazyPagingItems: LazyPagingItems<ArticleModel>,
     enterArticle: (ArticleModel) -> Unit
 ) {
+
     LazyColumn(
         modifier = modifier,
         state = listState

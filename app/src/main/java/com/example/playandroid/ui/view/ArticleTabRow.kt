@@ -1,12 +1,17 @@
 package com.example.playandroid.ui.view
 
+import androidx.compose.foundation.layout.requiredWidth
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.ScrollableTabRow
 import androidx.compose.material.Tab
+import androidx.compose.material.TabRowDefaults
+import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.traceEventEnd
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.playandroid.logic.model.ClassifyModel
 import com.example.playandroid.logic.utils.getHtmlText
@@ -20,7 +25,14 @@ fun ArticleTabRow(
     ScrollableTabRow(
         selectedTabIndex = position ?: 0,
         modifier = Modifier.wrapContentWidth(),
-        edgePadding = 3.dp
+        edgePadding = 3.dp,
+        indicator = { positions ->
+            TabRowDefaults.Indicator(
+                Modifier
+                    .tabIndicatorOffset(positions[position ?: 0])
+                    .requiredWidth(50.dp),
+            )
+        }
     ) {
         data.forEachIndexed{ index, classifyModel ->
             Tab(

@@ -6,7 +6,7 @@ import com.example.playandroid.logic.model.Query
 import kotlinx.coroutines.flow.Flow
 
 /**
- * 基础仓库层，定义了PAGE_SIZE，getPagingData()抽象方法
+ * 基础仓库层，提供获得列表方法
  */
 abstract class BaseArticlePagingRepository {
     companion object{

@@ -15,8 +15,6 @@ abstract class BasePagingSource : PagingSource<Int, ArticleModel>() {
         return try {
             //通过params参数获得key，key表示当前页数
             val page = params.key ?: 1 //将第1页设置为默认值
-            // 从网络数据源获取当前页的数据
-            val apiResponse = PlayAndroidNetwork.getArticleList(page)
             // 从服务器返回的数据中获得每一个数据项保存到List中
             val articleList = getArticleList(page)
             // 上一页，如果当前页是第一页上一页，则为null

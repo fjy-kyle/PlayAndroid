@@ -16,7 +16,7 @@ import com.example.playandroid.logic.utils.NetworkUtils
  * 首页仓库层, 只有两个方法，对应从网络数据源获取 Paging数据和 Banner数据
  * 提供给ViewModel使用，把拿到的数据返回给ViewModel
  */
-class HomeArticlePagingRepository (val application: Application): BaseArticlePagingRepository() {
+class HomeArticlePagingRepository (private val application: Application): BaseArticlePagingRepository() {
 
     /*
      * 这里创建了一个Pager对象，

@@ -1,8 +1,12 @@
 package com.example.playandroid.ui.main
 
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class HomeViewModel: ViewModel() {
 
@@ -13,4 +17,5 @@ class HomeViewModel: ViewModel() {
     fun onPositionChanged(position: CourseTabs) {
         _position.value = position
     }
+
 }

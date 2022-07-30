@@ -13,6 +13,7 @@ import com.example.playandroid.logic.network.PlayAndroidNetwork
 class HomePagingSource : BasePagingSource() {
     override suspend fun getArticleList(page: Int): List<ArticleModel> {
         val apiResponse = PlayAndroidNetwork.getArticleList(page)
-        return apiResponse.data.datas
+        // 打乱原有数据再返回，防止每次返回的数据顺序排列固定
+        return apiResponse.data.datas.shuffled()
     }
 }

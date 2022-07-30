@@ -1,6 +1,7 @@
 package com.example.playandroid.logic.network
 
 import com.example.playandroid.logic.network.service.HomePageService
+import com.example.playandroid.logic.network.service.OfficialService
 import com.example.playandroid.logic.network.service.ProjectService
 
 /**
@@ -15,5 +16,9 @@ object PlayAndroidNetwork {
     private val projectPageService = ServiceCreator.create(ProjectService::class.java)
         suspend fun getProjectTree() = projectPageService.getProjectTree()
         suspend fun getProject(page: Int, cid: Int) = projectPageService.getProject(page, cid)
+
+    private val officialService = ServiceCreator.create(OfficialService::class.java)
+        suspend fun getWxArticleTree() = officialService.getWxArticleTree()
+        suspend fun getWxArticle(cid: Int, page: Int) = officialService.getWxArticle(cid, page)
 
 }

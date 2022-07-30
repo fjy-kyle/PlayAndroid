@@ -17,7 +17,7 @@ import com.example.playandroid.logic.model.ArticleModel
 import kotlinx.coroutines.flow.MutableStateFlow
 
 /**
- * 抽象的ViewModel 用于使用Paging加载数据的页面，
+ * 抽象 ViewModel 用于使用Paging加载数据的页面，
  * 之后使用Paging库来加载数据的Viewmodel都可以继承此类进行编写
  */
 abstract class BaseArticleViewModel(application: Application) :AndroidViewModel(application){

@@ -89,6 +89,7 @@ private fun webContent(
         mutableStateOf(0f)
     }
     Column(modifier = Modifier.fillMaxSize()) {
+        // 设置网页加载进度条
         LinearProgressIndicator(
             progress = progression.value / 100,
             modifier = Modifier.fillMaxWidth(),
@@ -97,6 +98,7 @@ private fun webContent(
         AndroidView(
             factory = {
                 webView.apply {
+                    // 设置页面内打开网页时，在当前页面打开，而不是打开系统浏览器
                     webViewClient = object :WebViewClient(){}
                     loadUrl(article?.link?:"")
                 }

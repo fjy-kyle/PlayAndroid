@@ -4,21 +4,20 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.toUpperCase
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.playandroid.R
 import com.example.playandroid.ui.page.home.HomePage
-import com.example.playandroid.ui.page.project.ProjectPage
+import com.example.playandroid.ui.page.official_project.official.OfficialViewModel
+import com.example.playandroid.ui.page.official_project.project.ArticlePageWithTree
+import com.example.playandroid.ui.page.official_project.project.ProjectViewModel
 import java.util.Locale
 
 // 主页面
@@ -27,7 +26,6 @@ fun MainPage(actions: PlayActions, viewModel: HomeViewModel = viewModel()){
 
     val position by viewModel.position.observeAsState()
     val tabs = CourseTabs.values()
-
     Scaffold(
         backgroundColor = MaterialTheme.colors.primary,
         bottomBar = {
@@ -51,8 +49,12 @@ fun MainPage(actions: PlayActions, viewModel: HomeViewModel = viewModel()){
         Crossfade(targetState = position) { screen ->
             when(screen) {
                 CourseTabs.HOME_PAGE -> { HomePage(actions, modifier) }
-                CourseTabs.PROJECT ->  { ProjectPage(actions, modifier) }
-                CourseTabs.OFFICIAL_ACCOUNT -> Text(text = "测试3")// OfficialAccountPage(actions, modifier)
+                CourseTabs.PROJECT,CourseTabs.OFFICIAL_ACCOUNT ->  {
+                    val viewModel =
+                        if (screen == CourseTabs.PROJECT){ viewModel<ProjectViewModel>() }
+                        else { viewModel<OfficialViewModel>() }
+                    ArticlePageWithTree(actions, modifier, viewModel)
+                }
                 CourseTabs.MINE -> Text(text = "测试4")// ProfilePage(actions, modifier)
             }
         }
@@ -71,3 +73,4 @@ enum class CourseTabs(
     OFFICIAL_ACCOUNT(R.string.official_account, R.drawable.ic_nav_discover_normal),
     MINE(R.string.mine, R.drawable.ic_nav_my_normal)
 }
+
